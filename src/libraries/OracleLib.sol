@@ -20,22 +20,17 @@ error OracleLib_StalePrice();
         chainlinkFeed.latestRoundData();
 
 
-if (updatedAt==0|| roundId<answeredInRound){
-    revert OracleLib_StalePrice();
-}
+        if (updatedAt==0|| roundId<answeredInRound){
+               revert OracleLib_StalePrice();
+             }
 
 uint256  updateTime=block.timestamp-updatedAt;
 if(updateTime>TIMEOUT){
     revert OracleLib_StalePrice();
 }
-
-
-
 return (roundId,answer,startedAt,updatedAt,answeredInRound);
     }
-
-
-
+     
 function getTimeut(AggregatorV3Interface /* chainlinkfeed not used as of now */)public pure returns (uint256){
 
     return TIMEOUT;
