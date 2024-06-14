@@ -8,18 +8,37 @@ library OracleLin {
     
 error OracleLib_StalePrice();
 
-    uint private constant TIOMEOUT=3 hours;
+    uint private constant TIMEOUT=3 hours;
 
 
-    function staleCheckLatestRoundData(AggregatorV3Interface chainlinkFeed) public view  returns (uint80 ,uint256,uint256,uint256,uint80) {
-        
+    function staleCheckLatestRoundData(AggregatorV3Interface chainlinkFeed) 
+    public
+     view 
+     returns (uint80 ,int256,uint256,uint256,uint80) {
+
+        (uint80 roundId,int256 answer,uint256 startedAt,uint256 updatedAt,uint80 answeredInRound)=
+        chainlinkFeed.latestRoundData();
+
+
+if (updatedAt==0|| roundId<answeredInRound){
+    revert OracleLib_StalePrice();
+}
+
+uint256  updateTime=block.timestamp-updatedAt;
+if(updateTime>TIMEOUT){
+    revert OracleLib_StalePrice();
+}
 
 
 
-
-        (uint80 roundId,int256 answer,uint256 startedAt,uint256 updatedAt,uint80 answeredInRound)=chainlinkFeed.latestRoundData();
+return (roundId,answer,startedAt,updatedAt,answeredInRound);
     }
 
 
+
+function getTimeut(AggregatorV3Interface /* chainlinkfeed not used as of now */)public pure returns (uint256){
+
+    return TIMEOUT;
+}
 
 }
