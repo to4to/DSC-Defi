@@ -11,8 +11,13 @@ error OracleLib_StalePrice();
     uint private constant TIOMEOUT=3 hours;
 
 
-    function staleCheckLatestRoundData(AggregatorV3Interface chainlinkFeed) public view  returns (uint80 roundId,) {
+    function staleCheckLatestRoundData(AggregatorV3Interface chainlinkFeed) public view  returns (uint80 ,uint256,uint256,uint256,uint80) {
         
+
+
+
+
+        (uint80 roundId,uint256 answer,uint256 startedAt,uint256 updatedAt,uint80 answeredInRound)=chainlink.latestRoundData();
     }
 
 
