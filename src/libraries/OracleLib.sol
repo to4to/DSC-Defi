@@ -17,7 +17,7 @@ error OracleLib_StalePrice();
 
 
 
-        (uint80 roundId,uint256 answer,uint256 startedAt,uint256 updatedAt,uint80 answeredInRound)=chainlink.latestRoundData();
+        (uint80 roundId,int256 answer,uint256 startedAt,uint256 updatedAt,uint80 answeredInRound)=chainlinkFeed.latestRoundData();
     }
 
 
