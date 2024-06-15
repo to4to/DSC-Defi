@@ -9,7 +9,8 @@ contract DecentralizedStableCoin is ERC20Burnable ,Ownable {
 
     error DecentralizedStableCoin_AmountMustBeMoreThanZer();
     error DecentralizedStableCoin_BurnAmountExceedsBalance();
-error DecentralizedStableCoin_NotZerAddress();
+    error DecentralizedStableCoin_NotZerAddress();
+
     constructor()ERC20("DecentralizedStableCoin","DSC"){}
 
 
@@ -22,7 +23,6 @@ error DecentralizedStableCoin_NotZerAddress();
         if(balance<_amount){
             revert DecentralizedStableCoin_BurnAmountExceedsBalnace();
         }
-
 
         super.burn(_amount);
     }
@@ -38,15 +38,9 @@ error DecentralizedStableCoin_NotZerAddress();
             revert DecentralizedStableCoin_AmountMustBeMoreThanZer();
         }
 
-_mint(_to,_amount);
+        _mint(_to,_amount);
 
-return true;
+        return true;
     }
-
-
-
-
-
-
 
     }
