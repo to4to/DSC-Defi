@@ -24,6 +24,7 @@ modifier isAllowedToke(address token){
     if (token==address(0)){
         revert DSCEngine_CheckAddressOFToken();
     }
+    _;
 }
 
 
