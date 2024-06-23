@@ -28,5 +28,14 @@ modifier isAllowedToke(address token){
 }
 
 
+constructor(address[] memory tokenAddress,address[] memory priceFeedAddress,address dscAddress){
+
+
+
+
+
+
+}
+
 
 }
